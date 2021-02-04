@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ template "ozwdaemon.fullname" . }}
   labels:
-    {{ include "ozwdaemon.labels" . | indent 4 }}
+{{ include "ozwdaemon.labels" . | indent 4 }}
   annotations:
     {{- with .Values.service.annotations }}
     {{ tpl (toYaml .) $ | nindent 4 }}

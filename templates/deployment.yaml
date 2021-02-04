@@ -56,8 +56,14 @@ spec:
 #            - "-c"
 #            - "/usr/local/bin/ozwdaemon -s /dev/ttyUSB0 --mqtt-server {{ .Values.mqtt.server }}"
           ports:
-            - name: http
-              containerPort: 1982
+            - name: ozw-admin
+              containerPort: 1983
+              protocol: TCP
+            - name: ozw-vnc
+              containerPort: 5901
+              protocol: TCP
+            - name: ozw-http
+              containerPort: 7800
               protocol: TCP
           env:
             - { name: "USB_PATH", value: "/dev/ttyUSB0" }
@@ -73,8 +79,11 @@ spec:
 {{- if .Values.mqtt.tls }}
             - { name: "MQTT_TLS", value: {{ .Values.mqtt.tls | quote }} }
 {{- end }}
-{{- if .Values.mqtt.network_key }}
-            - { name: "OZW_NETWORK_KEY", value: {{ .Values.mqtt.network_key | quote }} }
+{{- if .Values.ozwdaemon.network_key }}
+            - { name: "OZW_NETWORK_KEY", value: {{ .Values.ozwdaemon.network_key | quote }} }
+{{- end }}
+{{- if .Values.ozwdaemon.auth_key }}
+            - { name: "OZW_AUTH_KEY", value: {{ .Values.ozwdaemon.auth_key | quote }} }
 {{- end }}
           volumeMounts:
             - name: data
