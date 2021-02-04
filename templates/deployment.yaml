@@ -85,6 +85,12 @@ spec:
 {{- if .Values.ozwdaemon.auth_key }}
             - { name: "OZW_AUTH_KEY", value: {{ .Values.ozwdaemon.auth_key | quote }} }
 {{- end }}
+{{- if .Values.ozwdaemon.instance }}
+            - { name: "OZW_INSTANCE", value: {{ .Values.ozwdaemon.instance | quote }} }
+{{- end }}
+{{- if .Values.ozwdaemon.stop_on_failure }}
+            - { name: "STOP_ON_FAILURE", value: {{ .Values.ozwdaemon.stop_on_failure | quote }} }
+{{- end }}
           volumeMounts:
             - name: data
               mountPath: /opt/ozw/config

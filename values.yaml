@@ -99,3 +99,5 @@ mqtt:
 ozwdaemon:
   network_key: ''
   auth_key: ''
+  instance: 1
+  stop_on_failure: true
