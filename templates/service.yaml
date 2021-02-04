@@ -23,17 +23,23 @@ spec:
   {{ end -}}
   {{- end -}}
   ports:
-    - port: {{ .Values.service.port.admin }}
+    {{ if .Values.service.port.admin.enabled }}
+    - port: {{ .Values.service.port.admin.port }}
       targetPort: ozw-admin
       protocol: TCP
       name: ozw-admin
-    - port: {{ .Values.service.port.vnc }}
+    {{ end }}
+    {{ if .Values.service.port.vnc.enabled }}
+    - port: {{ .Values.service.port.vnc.port }}
       targetPort: ozw-vnc
       protocol: TCP
       name: ozw-vnc
-    - port: {{ .Values.service.port.http }}
+    {{ end }}
+    {{ if .Values.service.port.http.enabled }}
+    - port: {{ .Values.service.port.http.port }}
       targetPort: ozw-http
       protocol: TCP
       name: ozw-http
+    {{ end }}
   selector:
     {{- include "ozwdaemon.selectorLabels" . | nindent 6 }}

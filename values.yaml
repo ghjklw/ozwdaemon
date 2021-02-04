@@ -60,9 +60,15 @@ service:
     type: LoadBalancer
     annotations: {}
     port:
-        admin: 1983
-        vnc: 5901
-        http: 7800
+        admin:
+          enabled: true
+          port: 1983
+        vnc:
+          enabled: false
+          port: 5901
+        http:
+          enabled: false
+          port: 7800
 
 affinity: {}
 
